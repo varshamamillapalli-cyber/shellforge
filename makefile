@@ -1,9 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -Iinclude
-LIBS = -lreadline
 
-shellforge: src/history.c src/main.c
-	gcc $(CFLAGS) src/history.c src/main.c $(LIBS) -o shellforge
+CFLAGS = -Wall -Wextra -std=c11 -Iinclude
+
+SRC = \
+src/main.c \
+src/history.c \
+src/lexer.c \
+src/token.c
+
+TARGET = shellforge
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -lreadline -o $(TARGET)
 
 clean:
-	rm -f shellforge
+	rm -f $(TARGET)
